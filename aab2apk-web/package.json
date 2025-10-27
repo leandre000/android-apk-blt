@@ -1,17 +1,28 @@
 {
-  "name": "aab2apk-web",
-  "version": "0.1.0",
+  "name": "aab2apk-pro-web",
+  "version": "3.0.0",
+  "description": "Professional AAB to APK Converter - Web Edition",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "next": "16.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "next": "16.0.0"
+    "lucide-react": "^0.460.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.5",
+    "framer-motion": "^11.11.17",
+    "axios": "^1.7.9",
+    "react-dropzone": "^14.3.5",
+    "zustand": "^5.0.2",
+    "date-fns": "^4.1.0",
+    "recharts": "^2.15.0"
   },
   "devDependencies": {
     "typescript": "^5",
@@ -21,6 +32,7 @@
     "@tailwindcss/postcss": "^4",
     "tailwindcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "16.0.0"
+    "eslint-config-next": "16.0.0",
+    "@types/formidable": "^3.4.5"
   }
 }
