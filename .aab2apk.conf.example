@@ -1,0 +1,11 @@
+﻿# AAB2APK Configuration File Example
+# Copy this to .aab2apk.conf and customize
+
+OUTPUT_DIR="./output"
+KEYSTORE_PATH=""
+KEYSTORE_PASS=""
+KEY_ALIAS=""
+KEY_PASS=""
+OPTIMIZE=false
+UNIVERSAL=false
+VERBOSE=false
