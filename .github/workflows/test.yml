@@ -1,0 +1,28 @@
+﻿name: Test AAB2APK CLI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+    
+    - name: Make scripts executable
+      run: |
+        chmod +x builder.sh
+        chmod +x install.sh
+    
+    - name: Test help command
+      run: ./builder.sh --help
