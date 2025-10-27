@@ -1,0 +1,32 @@
+﻿# Output directories
+output/
+dist/
+build/
+release/
+
+# APK and AAB files
+*.apk
+*.aab
+*.apks
+
+# Keystore files
+*.keystore
+*.jks
+
+# Bundletool
+bundletool.jar
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# Config files
+.aab2apk.conf
