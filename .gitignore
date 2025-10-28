@@ -30,3 +30,19 @@ bundletool.jar
 
 # Config files
 .aab2apk.conf
+
+# Temporary commit files
+commit-*.txt
+
+# Node modules
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
