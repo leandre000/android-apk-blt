@@ -6,8 +6,6 @@
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="100" fill="url(#appGrad)"/>
-  <g transform="translate(256, 256)">
-    <path d="M 30 -150 L -70 0 L -20 0 L -50 150 L 80 -30 L 20 -30 Z" fill="white" stroke="white" stroke-width="8"/>
-  </g>
-  <text x="256" y="420" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="white" text-anchor="middle">AAB2APK</text>
+  <path d="M 280 100 L 180 256 L 230 256 L 200 410 L 330 230 L 265 230 Z" 
+        fill="white" stroke="white" stroke-width="6" stroke-linejoin="round"/>
 </svg>

@@ -1,0 +1,16 @@
+﻿{
+  "name": "AAB2APK Pro",
+  "short_name": "AAB2APK",
+  "description": "Professional Android App Bundle to APK Converter",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
