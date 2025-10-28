@@ -212,7 +212,9 @@ export default function ReviewsPage() {
                     <div className="flex items-center space-x-2">
                       <h3 className="font-bold dark:text-white">{review.name}</h3>
                       {review.verified && (
-                        <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" title="Verified User" />
+                        <span title="Verified User">
+                          <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                        </span>
                       )}
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">{review.role}</p>
