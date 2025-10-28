@@ -223,6 +223,18 @@ export default function DocsPage() {
               </div>
             )}
 
+            {activeSection === 'api-reference' && (
+              <div className="space-y-8">
+                <h1 className="text-4xl font-bold mb-4 dark:text-white">API Reference</h1>
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">Base URL</h2>
+                  <div className="bg-gray-900 text-gray-100 p-4 rounded-lg">
+                    <code>https://api.aab2apk.pro/v1</code>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {activeSection === 'faq' && (
               <div className="space-y-8">
                 <h1 className="text-4xl font-bold mb-4 dark:text-white">FAQ</h1>
