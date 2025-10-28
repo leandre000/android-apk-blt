@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "AAB2APK Pro - Professional Android App Bundle Converter",
   description: "Convert Android App Bundles (AAB) to APK files instantly. Fast, secure, and free. Supports universal APK, signing, and optimization.",
   keywords: ["AAB to APK", "Android App Bundle", "APK Converter", "Android", "App Bundle", "Universal APK"],
-  authors: [{ name: "Shema Leandre" }],
+  authors: [{ name: "Shema Leandre", url: "https://shemaleandre.vercel.app" }],
   creator: "Shema Leandre",
   publisher: "AAB2APK Pro",
   openGraph: {
@@ -24,15 +24,25 @@ export const metadata: Metadata = {
     description: "Convert Android App Bundles to APK files with ease",
     type: "website",
     locale: "en_US",
+    url: "https://github.com/leandre000/android-apk-blt",
+    siteName: "AAB2APK Pro",
   },
   twitter: {
     card: "summary_large_image",
     title: "AAB2APK Pro",
     description: "Professional Android App Bundle to APK Converter",
+    creator: "@leandre000",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.svg", type: "image/svg+xml" },
+    ],
   },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -42,6 +52,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
