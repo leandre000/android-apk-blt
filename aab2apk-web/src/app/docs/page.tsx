@@ -109,6 +109,108 @@ export default function DocsPage() {
               </div>
             )}
 
+            {activeSection === 'web-usage' && (
+              <div className="space-y-8">
+                <h1 className="text-4xl font-bold mb-4 dark:text-white">Web Usage Guide</h1>
+                
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">Step 1: Upload Your AAB File</h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Navigate to the converter page and upload your Android App Bundle file.
+                  </p>
+                  <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 p-4 mb-4">
+                    <p className="text-sm text-blue-800 dark:text-blue-300">
+                      <strong>Tip:</strong> You can drag and drop your .aab file or click to browse.
+                    </p>
+                  </div>
+                  <div className="bg-gray-900 text-gray-100 p-4 rounded-lg">
+                    <p className="text-sm font-mono">Supported formats: .aab</p>
+                    <p className="text-sm font-mono">Maximum file size: 100MB</p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">Step 2: Configure Conversion Options</h2>
+                  <div className="space-y-4">
+                    <div className="border-l-4 border-green-500 pl-4">
+                      <h3 className="font-bold text-lg dark:text-white mb-2">Universal APK</h3>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Generates a single APK that works on all device configurations. Recommended for most use cases.
+                      </p>
+                      <code className="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded mt-2 inline-block">
+                        ✓ Enabled by default
+                      </code>
+                    </div>
+                    
+                    <div className="border-l-4 border-blue-500 pl-4">
+                      <h3 className="font-bold text-lg dark:text-white mb-2">Optimize APK</h3>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Uses zipalign to optimize the APK for better runtime performance and reduced memory usage.
+                      </p>
+                      <code className="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded mt-2 inline-block">
+                        Recommended for production builds
+                      </code>
+                    </div>
+                    
+                    <div className="border-l-4 border-yellow-500 pl-4">
+                      <h3 className="font-bold text-lg dark:text-white mb-2">Sign APK</h3>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Signs the APK with a debug keystore. Use this for testing only.
+                      </p>
+                      <div className="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded mt-2">
+                        <p className="text-sm text-yellow-800 dark:text-yellow-300">
+                          ⚠️ <strong>Warning:</strong> Debug signatures are not suitable for production releases.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">Step 3: Convert & Download</h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Click the "Convert to APK" button and wait for the conversion to complete.
+                  </p>
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                      <span className="text-gray-700 dark:text-gray-300">Conversion typically takes 10-30 seconds</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                      <span className="text-gray-700 dark:text-gray-300">Progress bar shows real-time status</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                      <span className="text-gray-700 dark:text-gray-300">Download starts automatically when complete</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">Best Practices</h2>
+                  <ul className="space-y-2">
+                    <li className="flex items-start space-x-2">
+                      <span className="text-green-600 dark:text-green-400 font-bold">✓</span>
+                      <span className="text-gray-700 dark:text-gray-300">Always test converted APKs on multiple devices before distribution</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <span className="text-green-600 dark:text-green-400 font-bold">✓</span>
+                      <span className="text-gray-700 dark:text-gray-300">Enable optimization for production builds</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <span className="text-green-600 dark:text-green-400 font-bold">✓</span>
+                      <span className="text-gray-700 dark:text-gray-300">Use your own keystore for production signing</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <span className="text-green-600 dark:text-green-400 font-bold">✓</span>
+                      <span className="text-gray-700 dark:text-gray-300">Keep your original AAB file as backup</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
+
             {activeSection === 'cli-usage' && (
               <div className="space-y-8">
                 <h1 className="text-4xl font-bold mb-4 dark:text-white">CLI Usage</h1>
