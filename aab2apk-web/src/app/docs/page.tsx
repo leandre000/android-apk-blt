@@ -226,10 +226,168 @@ export default function DocsPage() {
             {activeSection === 'api-reference' && (
               <div className="space-y-8">
                 <h1 className="text-4xl font-bold mb-4 dark:text-white">API Reference</h1>
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                  Complete REST API documentation for programmatic AAB to APK conversion.
+                </p>
+
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white">Base URL</h2>
                   <div className="bg-gray-900 text-gray-100 p-4 rounded-lg">
-                    <code>https://api.aab2apk.pro/v1</code>
+                    <code className="text-green-400">https://api.aab2apk.pro/v1</code>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">Authentication</h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    All API requests require authentication using an API key in the Authorization header.
+                  </p>
+                  <div className="bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm mb-4">
+                    <span className="text-blue-400">Authorization:</span> <span className="text-green-400">Bearer YOUR_API_KEY</span>
+                  </div>
+                  <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 p-4">
+                    <p className="text-sm text-blue-800 dark:text-blue-300">
+                      <strong>Get your API key:</strong> Sign up at the dashboard to receive your free API key.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">POST /convert</h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">Convert an AAB file to APK format.</p>
+                  
+                  <h3 className="font-bold text-lg mb-3 dark:text-white">Request Parameters</h3>
+                  <div className="overflow-x-auto mb-4">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                      <thead>
+                        <tr className="bg-gray-50 dark:bg-gray-900">
+                          <th className="px-4 py-2 text-left text-sm font-semibold dark:text-white">Parameter</th>
+                          <th className="px-4 py-2 text-left text-sm font-semibold dark:text-white">Type</th>
+                          <th className="px-4 py-2 text-left text-sm font-semibold dark:text-white">Required</th>
+                          <th className="px-4 py-2 text-left text-sm font-semibold dark:text-white">Description</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                        <tr>
+                          <td className="px-4 py-2 font-mono text-sm text-blue-600 dark:text-blue-400">file</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">binary</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">Yes</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">The AAB file to convert</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-2 font-mono text-sm text-blue-600 dark:text-blue-400">universal</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">boolean</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">No</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">Generate universal APK (default: true)</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-2 font-mono text-sm text-blue-600 dark:text-blue-400">optimize</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">boolean</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">No</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">Optimize with zipalign (default: true)</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-2 font-mono text-sm text-blue-600 dark:text-blue-400">sign</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">boolean</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">No</td>
+                          <td className="px-4 py-2 text-sm dark:text-gray-300">Sign with debug keystore (default: false)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <h3 className="font-bold text-lg mb-3 dark:text-white">Example Request</h3>
+                  <div className="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                    <pre className="text-sm"><code>{`curl -X POST https://api.aab2apk.pro/v1/convert \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -F "file=@app-release.aab" \\
+  -F "universal=true" \\
+  -F "optimize=true" \\
+  -F "sign=false"`}</code></pre>
+                  </div>
+
+                  <h3 className="font-bold text-lg mb-3 dark:text-white">Success Response (200 OK)</h3>
+                  <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                    <pre className="text-sm"><code>{`{
+  "success": true,
+  "conversionId": "conv_abc123xyz",
+  "fileName": "app-release.apk",
+  "fileSize": 15728640,
+  "downloadUrl": "https://cdn.aab2apk.pro/downloads/conv_abc123xyz.apk",
+  "expiresAt": "2025-10-29T12:00:00Z",
+  "metadata": {
+    "packageName": "com.example.app",
+    "versionCode": 1,
+    "versionName": "1.0.0",
+    "minSdkVersion": 21,
+    "targetSdkVersion": 34
+  }
+}`}</code></pre>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">GET /status/:id</h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">Check conversion status by ID.</p>
+                  <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                    <pre className="text-sm"><code>{`GET /v1/status/conv_abc123xyz
+
+Response:
+{
+  "conversionId": "conv_abc123xyz",
+  "status": "completed",
+  "progress": 100,
+  "createdAt": "2025-10-28T10:30:00Z",
+  "completedAt": "2025-10-28T10:30:25Z"
+}`}</code></pre>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">Error Responses</h2>
+                  <div className="space-y-3">
+                    <div className="border-l-4 border-red-500 pl-4 py-2">
+                      <code className="text-red-600 dark:text-red-400 font-bold">400 Bad Request</code>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Invalid file format or missing required parameters</p>
+                    </div>
+                    <div className="border-l-4 border-yellow-500 pl-4 py-2">
+                      <code className="text-yellow-600 dark:text-yellow-400 font-bold">401 Unauthorized</code>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Invalid or missing API key</p>
+                    </div>
+                    <div className="border-l-4 border-orange-500 pl-4 py-2">
+                      <code className="text-orange-600 dark:text-orange-400 font-bold">413 Payload Too Large</code>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">File exceeds maximum size limit (100MB)</p>
+                    </div>
+                    <div className="border-l-4 border-purple-500 pl-4 py-2">
+                      <code className="text-purple-600 dark:text-purple-400 font-bold">429 Too Many Requests</code>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Rate limit exceeded (100 requests/hour for free tier)</p>
+                    </div>
+                    <div className="border-l-4 border-gray-500 pl-4 py-2">
+                      <code className="text-gray-600 dark:text-gray-400 font-bold">500 Internal Server Error</code>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Conversion failed - please try again or contact support</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-6 border border-purple-200 dark:border-purple-800">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">Rate Limits</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                      <p className="font-bold text-lg text-blue-600 dark:text-blue-400 mb-2">Free Tier</p>
+                      <ul className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                        <li>• 100 requests/hour</li>
+                        <li>• Max 10MB file size</li>
+                        <li>• 24-hour file retention</li>
+                      </ul>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                      <p className="font-bold text-lg text-purple-600 dark:text-purple-400 mb-2">Pro Tier</p>
+                      <ul className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                        <li>• 1000 requests/hour</li>
+                        <li>• Max 100MB file size</li>
+                        <li>• 7-day file retention</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
