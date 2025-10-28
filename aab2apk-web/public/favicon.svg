@@ -4,13 +4,7 @@
       <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#9333ea;stop-opacity:1" />
     </linearGradient>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
-    </filter>
   </defs>
-  <circle cx="256" cy="256" r="240" fill="url(#grad)" filter="url(#shadow)"/>
-  <path d="M 280 100 L 180 256 L 230 256 L 200 410 L 330 230 L 265 230 Z" 
-        fill="white" stroke="white" stroke-width="4" stroke-linejoin="round"/>
-  <circle cx="350" cy="150" r="12" fill="white" opacity="0.6"/>
-  <circle cx="370" cy="170" r="8" fill="white" opacity="0.4"/>
+  <circle cx="256" cy="256" r="240" fill="url(#grad)"/>
+  <path d="M 280 100 L 180 256 L 230 256 L 200 410 L 330 230 L 265 230 Z" fill="white" stroke="white" stroke-width="6"/>
 </svg>
