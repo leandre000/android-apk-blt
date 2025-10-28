@@ -393,12 +393,311 @@ Response:
               </div>
             )}
 
+            {activeSection === 'examples' && (
+              <div className="space-y-8">
+                <h1 className="text-4xl font-bold mb-4 dark:text-white">Code Examples</h1>
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                  Ready-to-use code examples in multiple programming languages.
+                </p>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center">
+                    <FileCode className="h-6 w-6 mr-2 text-yellow-500" />
+                    JavaScript / Node.js
+                  </h2>
+                  <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                    <pre className="text-sm"><code>{`const axios = require('axios');
+const FormData = require('form-data');
+const fs = require('fs');
+
+async function convertAAB(filePath) {
+  const form = new FormData();
+  form.append('file', fs.createReadStream(filePath));
+  form.append('universal', 'true');
+  form.append('optimize', 'true');
+  form.append('sign', 'false');
+
+  try {
+    const response = await axios.post(
+      'https://api.aab2apk.pro/v1/convert',
+      form,
+      {
+        headers: {
+          ...form.getHeaders(),
+          'Authorization': 'Bearer YOUR_API_KEY'
+        }
+      }
+    );
+
+    console.log('Conversion successful!');
+    console.log('Download URL:', response.data.downloadUrl);
+    console.log('File expires at:', response.data.expiresAt);
+    
+    return response.data;
+  } catch (error) {
+    console.error('Conversion failed:', error.response?.data || error.message);
+    throw error;
+  }
+}
+
+// Usage
+convertAAB('./app-release.aab')
+  .then(result => console.log('Success:', result))
+  .catch(err => console.error('Error:', err));`}</code></pre>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center">
+                    <FileCode className="h-6 w-6 mr-2 text-blue-500" />
+                    Python
+                  </h2>
+                  <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                    <pre className="text-sm"><code>{`import requests
+import json
+
+def convert_aab(file_path, api_key):
+    url = 'https://api.aab2apk.pro/v1/convert'
+    
+    headers = {
+        'Authorization': f'Bearer {api_key}'
+    }
+    
+    files = {
+        'file': open(file_path, 'rb')
+    }
+    
+    data = {
+        'universal': 'true',
+        'optimize': 'true',
+        'sign': 'false'
+    }
+    
+    try:
+        response = requests.post(url, headers=headers, files=files, data=data)
+        response.raise_for_status()
+        
+        result = response.json()
+        print(f"Conversion successful!")
+        print(f"Download URL: {result['downloadUrl']}")
+        print(f"File expires at: {result['expiresAt']}")
+        
+        return result
+        
+    except requests.exceptions.RequestException as e:
+        print(f"Conversion failed: {e}")
+        raise
+    finally:
+        files['file'].close()
+
+# Usage
+if __name__ == '__main__':
+    api_key = 'YOUR_API_KEY'
+    result = convert_aab('app-release.aab', api_key)
+    print(json.dumps(result, indent=2))`}</code></pre>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center">
+                    <Terminal className="h-6 w-6 mr-2 text-green-500" />
+                    cURL
+                  </h2>
+                  <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                    <pre className="text-sm"><code>{`# Basic conversion
+curl -X POST https://api.aab2apk.pro/v1/convert \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -F "file=@app-release.aab" \\
+  -F "universal=true" \\
+  -F "optimize=true" \\
+  -F "sign=false"
+
+# Check conversion status
+curl -X GET https://api.aab2apk.pro/v1/status/conv_abc123xyz \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# Download the converted APK
+curl -O https://cdn.aab2apk.pro/downloads/conv_abc123xyz.apk`}</code></pre>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg p-6 border border-green-200 dark:border-green-800">
+                  <h2 className="text-2xl font-bold mb-4 dark:text-white">Best Practices</h2>
+                  <ul className="space-y-3">
+                    <li className="flex items-start space-x-3">
+                      <span className="text-green-600 dark:text-green-400 font-bold text-xl">✓</span>
+                      <div>
+                        <p className="font-semibold dark:text-white">Always handle errors gracefully</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Implement proper error handling and retry logic</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start space-x-3">
+                      <span className="text-green-600 dark:text-green-400 font-bold text-xl">✓</span>
+                      <div>
+                        <p className="font-semibold dark:text-white">Store API keys securely</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Use environment variables, never hardcode keys</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start space-x-3">
+                      <span className="text-green-600 dark:text-green-400 font-bold text-xl">✓</span>
+                      <div>
+                        <p className="font-semibold dark:text-white">Respect rate limits</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Implement exponential backoff for 429 responses</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start space-x-3">
+                      <span className="text-green-600 dark:text-green-400 font-bold text-xl">✓</span>
+                      <div>
+                        <p className="font-semibold dark:text-white">Close file streams</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Always close file handles after upload</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
+
             {activeSection === 'faq' && (
               <div className="space-y-8">
-                <h1 className="text-4xl font-bold mb-4 dark:text-white">FAQ</h1>
+                <h1 className="text-4xl font-bold mb-4 dark:text-white">Frequently Asked Questions</h1>
+                
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
-                  <h3 className="font-bold text-lg mb-2 dark:text-white">What is an AAB file?</h3>
-                  <p className="text-gray-600 dark:text-gray-400">AAB (Android App Bundle) is the publishing format for Android apps.</p>
+                  <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
+                    <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
+                    What is an AAB file?
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-2">
+                    AAB (Android App Bundle) is the official publishing format for Android apps on Google Play Store. 
+                    It's a more efficient way to package your app, allowing Google Play to generate optimized APKs for different device configurations.
+                  </p>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
+                    <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
+                    Why convert AAB to APK?
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    While AAB is great for Play Store distribution, you might need APK files for:
+                  </p>
+                  <ul className="mt-2 space-y-1 text-gray-600 dark:text-gray-400 ml-4">
+                    <li>• Direct distribution outside Play Store</li>
+                    <li>• Testing on physical devices</li>
+                    <li>• Enterprise app distribution</li>
+                    <li>• Sharing with beta testers</li>
+                    <li>• Installing on devices without Play Store access</li>
+                  </ul>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
+                    <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
+                    Is the conversion process secure?
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Yes! All files are:
+                  </p>
+                  <ul className="mt-2 space-y-1 text-gray-600 dark:text-gray-400 ml-4">
+                    <li>• Encrypted during transfer using HTTPS/TLS</li>
+                    <li>• Processed in isolated containers</li>
+                    <li>• Automatically deleted after 24 hours (free tier)</li>
+                    <li>• Never shared with third parties</li>
+                    <li>• Scanned for malware before processing</li>
+                  </ul>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
+                    <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
+                    What's the difference between Universal APK and Split APKs?
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-2">
+                    <strong>Universal APK:</strong> A single APK file that works on all device configurations. 
+                    Larger file size but easier to distribute.
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    <strong>Split APKs:</strong> Multiple smaller APK files optimized for specific device configurations 
+                    (screen density, CPU architecture, language). More efficient but requires all splits to be installed together.
+                  </p>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
+                    <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
+                    Can I use this for production apps?
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Yes, but with important considerations:
+                  </p>
+                  <ul className="mt-2 space-y-1 text-gray-600 dark:text-gray-400 ml-4">
+                    <li>• ✓ Use your own keystore for signing production APKs</li>
+                    <li>• ✓ Enable optimization for better performance</li>
+                    <li>• ✓ Test thoroughly on multiple devices before release</li>
+                    <li>• ✗ Don't use debug signing for production</li>
+                    <li>• ✗ Don't distribute unsigned APKs</li>
+                  </ul>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
+                    <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
+                    What file size limits apply?
+                  </h3>
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full mt-2">
+                      <thead>
+                        <tr className="border-b dark:border-gray-700">
+                          <th className="text-left py-2 px-4 font-semibold dark:text-white">Tier</th>
+                          <th className="text-left py-2 px-4 font-semibold dark:text-white">Max File Size</th>
+                          <th className="text-left py-2 px-4 font-semibold dark:text-white">Retention</th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-gray-600 dark:text-gray-400">
+                        <tr className="border-b dark:border-gray-700">
+                          <td className="py-2 px-4">Free</td>
+                          <td className="py-2 px-4">10 MB</td>
+                          <td className="py-2 px-4">24 hours</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2 px-4">Pro</td>
+                          <td className="py-2 px-4">100 MB</td>
+                          <td className="py-2 px-4">7 days</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                  <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
+                    <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
+                    How do I get an API key?
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-3">
+                    Getting an API key is simple:
+                  </p>
+                  <ol className="space-y-2 text-gray-600 dark:text-gray-400 ml-4">
+                    <li>1. Visit the <Link href="/dashboard" className="text-blue-600 hover:underline">Dashboard</Link></li>
+                    <li>2. Sign up for a free account</li>
+                    <li>3. Navigate to API Keys section</li>
+                    <li>4. Click "Generate New Key"</li>
+                    <li>5. Copy and securely store your API key</li>
+                  </ol>
+                </div>
+
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+                  <h3 className="font-bold text-xl mb-3 dark:text-white">Still have questions?</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Can't find what you're looking for? We're here to help!
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <a href="mailto:Iamshemaleandre@gmail.com" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-center transition-colors">
+                      Contact Support
+                    </a>
+                    <a href="https://github.com/leandre000/android-apk-blt/issues" target="_blank" rel="noopener noreferrer" className="px-6 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-center transition-colors">
+                      Report an Issue
+                    </a>
+                  </div>
                 </div>
               </div>
             )}
