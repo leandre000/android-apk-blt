@@ -112,11 +112,11 @@ export default function ReviewsPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-violet-100 via-purple-50 to-indigo-100 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-violet-50 via-white to-purple-50 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-violet-300/30 dark:bg-violet-600/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-300/30 dark:bg-indigo-600/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-violet-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl"></div>
       </div>
 
       <Navigation />
@@ -124,12 +124,12 @@ export default function ReviewsPage() {
       <main className="flex-1 container mx-auto px-4 py-12 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">User Reviews</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">See what developers around the world are saying</p>
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">User Reviews</h1>
+          <p className="text-lg text-gray-600">See what developers around the world are saying</p>
         </div>
 
         {/* Stats Overview */}
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl mb-12 border border-violet-200/50 dark:border-violet-700/50">
+        <div className="bg-white backdrop-blur-sm rounded-3xl p-8 shadow-2xl mb-12 border border-violet-200">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="text-6xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent mb-2">{stats.averageRating}</div>
@@ -147,8 +147,8 @@ export default function ReviewsPage() {
                 const percentage = (count / stats.totalReviews) * 100
                 return (
                   <div key={stars} className="flex items-center space-x-2">
-                    <span className="text-sm font-medium dark:text-white w-12">{stars} star</span>
-                    <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <span className="text-sm font-medium text-gray-900 w-12">{stars} star</span>
+                    <div className="flex-1 bg-gray-200 rounded-full h-2">
                       <div
                         className="bg-yellow-400 h-2 rounded-full"
                         style={{ width: `${percentage}%` }}
@@ -161,15 +161,15 @@ export default function ReviewsPage() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="text-center p-4 bg-violet-50 dark:bg-violet-900/20 rounded-lg border border-violet-200/50 dark:border-violet-700/50">
-                <Users className="h-8 w-8 text-violet-600 dark:text-violet-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold dark:text-white">10K+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Active Users</div>
+              <div className="text-center p-4 bg-violet-50 rounded-lg border border-violet-200">
+                <Users className="h-8 w-8 text-violet-600 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-black">{stats.totalReviews}</div>
+                <div className="text-sm text-black">Total Reviews</div>
               </div>
-              <div className="text-center p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-200/50 dark:border-indigo-700/50">
-                <TrendingUp className="h-8 w-8 text-indigo-600 dark:text-indigo-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold dark:text-white">93%</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Recommend</div>
+              <div className="text-center p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                <TrendingUp className="h-8 w-8 text-indigo-600 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-black">93%</div>
+                <div className="text-sm text-black">Recommend</div>
               </div>
             </div>
           </div>
@@ -178,12 +178,12 @@ export default function ReviewsPage() {
         {/* Filters */}
         <div className="flex flex-wrap gap-4 mb-8">
           <div className="flex items-center space-x-2">
-            <Filter className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-            <span className="font-medium dark:text-white">Filter:</span>
+            <Filter className="h-5 w-5 text-black" />
+            <span className="font-medium text-black">Filter:</span>
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="px-4 py-2 border border-violet-300 dark:border-violet-600 rounded-lg bg-white/80 dark:bg-gray-800/80 dark:text-white backdrop-blur-sm focus:ring-2 focus:ring-violet-500"
+              className="px-4 py-2 border border-violet-300 rounded-lg bg-white text-black focus:ring-2 focus:ring-violet-500"
             >
               <option value="all">All Reviews</option>
               <option value="5">5 Stars</option>
@@ -192,11 +192,11 @@ export default function ReviewsPage() {
             </select>
           </div>
           <div className="flex items-center space-x-2">
-            <span className="font-medium dark:text-white">Sort by:</span>
+            <span className="font-medium text-black">Sort by:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 border border-violet-300 dark:border-violet-600 rounded-lg bg-white/80 dark:bg-gray-800/80 dark:text-white backdrop-blur-sm focus:ring-2 focus:ring-violet-500"
+              className="px-4 py-2 border border-violet-300 rounded-lg bg-white text-black focus:ring-2 focus:ring-violet-500"
             >
               <option value="recent">Most Recent</option>
               <option value="helpful">Most Helpful</option>
@@ -208,7 +208,7 @@ export default function ReviewsPage() {
         {/* Reviews List */}
         <div className="space-y-6">
           {reviews.map((review) => (
-            <div key={review.id} className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all border border-violet-200/50 dark:border-violet-700/50">
+            <div key={review.id} className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all border border-violet-200">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
@@ -216,14 +216,14 @@ export default function ReviewsPage() {
                   </div>
                   <div>
                     <div className="flex items-center space-x-2">
-                      <h3 className="font-bold dark:text-white">{review.name}</h3>
+                      <h3 className="font-bold text-black">{review.name}</h3>
                       {review.verified && (
                         <span title="Verified User">
-                          <CheckCircle className="h-5 w-5 text-violet-600 dark:text-violet-400" />
+                          <CheckCircle className="h-5 w-5 text-violet-600" />
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{review.role}</p>
+                    <p className="text-sm text-black">{review.role}</p>
                   </div>
                 </div>
                 <div className="text-right">
@@ -236,14 +236,14 @@ export default function ReviewsPage() {
                 </div>
               </div>
 
-              <p className="text-gray-700 dark:text-gray-300 mb-4">{review.comment}</p>
+              <p className="text-gray-700 mb-4">{review.comment}</p>
 
-              <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
-                <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
+              <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                <button className="flex items-center space-x-2 text-gray-600 hover:text-violet-600 transition-colors">
                   <ThumbsUp className="h-4 w-4" />
                   <span className="text-sm">Helpful ({review.helpful})</span>
                 </button>
-                <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
+                <button className="flex items-center space-x-2 text-gray-600 hover:text-violet-600 transition-colors">
                   <MessageSquare className="h-4 w-4" />
                   <span className="text-sm">Reply</span>
                 </button>
