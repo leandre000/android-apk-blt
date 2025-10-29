@@ -4,11 +4,12 @@
   "description": "Professional AAB to APK Converter - Web Edition",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack=false",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next node_modules/.cache"
   },
   "dependencies": {
     "next": "16.0.0",
