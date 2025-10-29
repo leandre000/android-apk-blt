@@ -1,8 +1,9 @@
 ﻿'use client'
 
 import { useState } from 'react'
-import { Book, Code, Terminal, Zap, Copy, Check, Github, Rocket, FileCode, HelpCircle } from 'lucide-react'
-import Link from 'next/link'
+import { Book, Code, Terminal, Copy, Check, Rocket, FileCode, HelpCircle } from 'lucide-react'
+import Navigation from '@/components/Navigation'
+import Footer from '@/components/Footer'
 
 export default function DocsPage() {
   const [activeSection, setActiveSection] = useState('getting-started')
@@ -24,30 +25,20 @@ export default function DocsPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <nav className="border-b bg-white dark:bg-gray-800 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center space-x-2">
-            <Zap className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-            <span className="text-2xl font-bold dark:text-white">AAB2APK Pro</span>
-          </Link>
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="px-4 py-2 text-sm font-medium hover:text-blue-600 dark:text-gray-300">Home</Link>
-            <Link href="/converter" className="px-4 py-2 text-sm font-medium hover:text-blue-600 dark:text-gray-300">Converter</Link>
-            <Link href="/dashboard" className="px-4 py-2 text-sm font-medium hover:text-blue-600 dark:text-gray-300">Dashboard</Link>
-            <a href="https://github.com/leandre000/android-apk-blt" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center space-x-2">
-              <Github className="h-4 w-4" />
-              <span>GitHub</span>
-            </a>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-violet-100 via-purple-50 to-indigo-100 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-violet-300/30 dark:bg-violet-600/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-300/30 dark:bg-indigo-600/20 rounded-full blur-3xl"></div>
+      </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <Navigation />
+
+      <main className="flex-1 container mx-auto px-4 py-8 relative z-10">
         <div className="flex gap-8">
           <aside className="w-64 flex-shrink-0 hidden lg:block">
-            <div className="sticky top-24 bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
-              <h3 className="font-bold text-lg mb-4 dark:text-white">Documentation</h3>
+            <div className="sticky top-24 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
+              <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">Documentation</h3>
               <nav className="space-y-1">
                 {sections.map((section) => {
                   const Icon = section.icon
@@ -57,7 +48,7 @@ export default function DocsPage() {
                       onClick={() => setActiveSection(section.id)}
                       className={`w-full flex items-center space-x-2 px-3 py-2 rounded-lg text-left transition-colors ${
                         activeSection === section.id
-                          ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                          ? 'bg-violet-50 dark:bg-violet-900/20 text-violet-600 dark:text-violet-400'
                           : 'hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300'
                       }`}
                     >
@@ -77,28 +68,28 @@ export default function DocsPage() {
                   <h1 className="text-4xl font-bold mb-4 dark:text-white">Getting Started</h1>
                   <p className="text-lg text-gray-600 dark:text-gray-300">Welcome to AAB2APK Pro! Convert your Android App Bundles to APK files with ease.</p>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center">
-                    <Rocket className="h-6 w-6 mr-2 text-blue-600" />
+                    <Rocket className="h-6 w-6 mr-2 text-violet-600" />
                     Quick Start
                   </h2>
                   <div className="space-y-4">
                     <div className="flex items-start space-x-3">
-                      <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-violet-600 to-indigo-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
                       <div>
                         <h3 className="font-semibold dark:text-white">Upload Your AAB File</h3>
                         <p className="text-gray-600 dark:text-gray-400">Go to the converter page and drag & drop your .aab file</p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-violet-600 to-indigo-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
                       <div>
                         <h3 className="font-semibold dark:text-white">Configure Options</h3>
                         <p className="text-gray-600 dark:text-gray-400">Choose conversion options like universal APK, optimization, and signing</p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-violet-600 to-indigo-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
                       <div>
                         <h3 className="font-semibold dark:text-white">Convert & Download</h3>
                         <p className="text-gray-600 dark:text-gray-400">Click convert and download your APK file</p>
@@ -113,7 +104,7 @@ export default function DocsPage() {
               <div className="space-y-8">
                 <h1 className="text-4xl font-bold mb-4 dark:text-white">Web Usage Guide</h1>
                 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white">Step 1: Upload Your AAB File</h2>
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     Navigate to the converter page and upload your Android App Bundle file.
@@ -129,7 +120,7 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white">Step 2: Configure Conversion Options</h2>
                   <div className="space-y-4">
                     <div className="border-l-4 border-green-500 pl-4">
@@ -166,7 +157,7 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white">Step 3: Convert & Download</h2>
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     Click the "Convert to APK" button and wait for the conversion to complete.
@@ -214,7 +205,7 @@ export default function DocsPage() {
             {activeSection === 'cli-usage' && (
               <div className="space-y-8">
                 <h1 className="text-4xl font-bold mb-4 dark:text-white">CLI Usage</h1>
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white">Installation</h2>
                   <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
                     <code>git clone https://github.com/leandre000/android-apk-blt.git{'\n'}cd android-apk-blt{'\n'}./install.sh</code>
@@ -230,14 +221,14 @@ export default function DocsPage() {
                   Complete REST API documentation for programmatic AAB to APK conversion.
                 </p>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white">Base URL</h2>
                   <div className="bg-gray-900 text-gray-100 p-4 rounded-lg">
                     <code className="text-green-400">https://api.aab2apk.pro/v1</code>
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white">Authentication</h2>
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     All API requests require authentication using an API key in the Authorization header.
@@ -252,7 +243,7 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white">POST /convert</h2>
                   <p className="text-gray-600 dark:text-gray-400 mb-4">Convert an AAB file to APK format.</p>
                   
@@ -326,7 +317,7 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white">GET /status/:id</h2>
                   <p className="text-gray-600 dark:text-gray-400 mb-4">Check conversion status by ID.</p>
                   <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
@@ -343,7 +334,7 @@ Response:
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white">Error Responses</h2>
                   <div className="space-y-3">
                     <div className="border-l-4 border-red-500 pl-4 py-2">
@@ -400,7 +391,7 @@ Response:
                   Ready-to-use code examples in multiple programming languages.
                 </p>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center">
                     <FileCode className="h-6 w-6 mr-2 text-yellow-500" />
                     JavaScript / Node.js
@@ -447,7 +438,7 @@ convertAAB('./app-release.aab')
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center">
                     <FileCode className="h-6 w-6 mr-2 text-blue-500" />
                     Python
@@ -498,7 +489,7 @@ if __name__ == '__main__':
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center">
                     <Terminal className="h-6 w-6 mr-2 text-green-500" />
                     cURL
@@ -561,7 +552,7 @@ curl -O https://cdn.aab2apk.pro/downloads/conv_abc123xyz.apk`}</code></pre>
               <div className="space-y-8">
                 <h1 className="text-4xl font-bold mb-4 dark:text-white">Frequently Asked Questions</h1>
                 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
                     <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
                     What is an AAB file?
@@ -572,7 +563,7 @@ curl -O https://cdn.aab2apk.pro/downloads/conv_abc123xyz.apk`}</code></pre>
                   </p>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
                     <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
                     Why convert AAB to APK?
@@ -589,7 +580,7 @@ curl -O https://cdn.aab2apk.pro/downloads/conv_abc123xyz.apk`}</code></pre>
                   </ul>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
                     <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
                     Is the conversion process secure?
@@ -606,7 +597,7 @@ curl -O https://cdn.aab2apk.pro/downloads/conv_abc123xyz.apk`}</code></pre>
                   </ul>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
                     <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
                     What's the difference between Universal APK and Split APKs?
@@ -621,7 +612,7 @@ curl -O https://cdn.aab2apk.pro/downloads/conv_abc123xyz.apk`}</code></pre>
                   </p>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
                     <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
                     Can I use this for production apps?
@@ -638,7 +629,7 @@ curl -O https://cdn.aab2apk.pro/downloads/conv_abc123xyz.apk`}</code></pre>
                   </ul>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
                     <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
                     What file size limits apply?
@@ -668,7 +659,7 @@ curl -O https://cdn.aab2apk.pro/downloads/conv_abc123xyz.apk`}</code></pre>
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-violet-200/50 dark:border-violet-700/50">
                   <h3 className="font-bold text-xl mb-3 dark:text-white flex items-center">
                     <HelpCircle className="h-5 w-5 mr-2 text-blue-600" />
                     How do I get an API key?
