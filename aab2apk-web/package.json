@@ -4,7 +4,7 @@
   "description": "Professional AAB to APK Converter - Web Edition",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack=false",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
