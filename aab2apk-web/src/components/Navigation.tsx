@@ -62,12 +62,12 @@ export default function Navigation() {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100"
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6 dark:text-white" />
+              <X className="h-6 w-6 text-gray-900" />
             ) : (
-              <Menu className="h-6 w-6 dark:text-white" />
+              <Menu className="h-6 w-6 text-gray-900" />
             )}
           </button>
         </div>
@@ -82,24 +82,28 @@ export default function Navigation() {
                 className={`block px-4 py-3 text-sm font-medium rounded-lg transition-all ${
                   isActive(link.href)
                     ? 'bg-blue-600 text-white'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
                 {link.label}
               </Link>
             ))}
             
-            <a
-              href="https://github.com/leandre000/android-apk-blt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-4 py-3 bg-gray-900 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 text-sm font-medium"
+            <Link
+              href="/dashboard"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-all"
             >
-              <div className="flex items-center space-x-2">
-                <Github className="h-4 w-4" />
-                <span>View on GitHub</span>
-              </div>
-            </a>
+              Sign In
+            </Link>
+            
+            <Link
+              href="/converter"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-4 py-3 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg hover:shadow-lg transition-all"
+            >
+              Start Converting →
+            </Link>
           </div>
         )}
       </div>
