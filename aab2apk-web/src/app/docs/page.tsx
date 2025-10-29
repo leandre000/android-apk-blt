@@ -61,7 +61,7 @@ export default function DocsPage() {
             </div>
           </aside>
 
-          <main className="flex-1 max-w-4xl">
+          <div className="flex-1 max-w-4xl">
             {activeSection === 'getting-started' && (
               <div className="space-y-8">
                 <div>
@@ -692,9 +692,11 @@ curl -O https://cdn.aab2apk.pro/downloads/conv_abc123xyz.apk`}</code></pre>
                 </div>
               </div>
             )}
-          </main>
+          </div>
         </div>
-      </div>
+      </main>
+
+      <Footer />
     </div>
   )
 }
