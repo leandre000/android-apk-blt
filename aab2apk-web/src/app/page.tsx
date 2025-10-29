@@ -21,24 +21,31 @@ export default function Home() {
           </div>
           
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 leading-tight tracking-tight">
-            Convert AAB to APK
-            <br />
-            Like a Pro
+            AAB2APK.io makes your work effortless
           </h1>
           
           <p className="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Professional Android App Bundle converter with signing, optimization, and more.
-            Fast, secure, and easy to use. No registration required.
+            Streamlining workflow for clarity and focused execution,
+            a solution trusted by over 1 million professionals for converting Android App Bundles.
           </p>
           
           <div className="flex justify-center space-x-4 flex-wrap gap-4 mb-20">
             <Link
               href="/converter"
-              className="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 flex items-center space-x-2 dark:bg-blue-500 dark:hover:bg-blue-600 shadow-lg shadow-blue-500/50 transition-all"
+              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 flex items-center space-x-2 transition-all"
             >
               <span>Start Converting</span>
               <ArrowRight className="h-5 w-5" />
             </Link>
+            <Link
+              href="/docs"
+              className="px-8 py-4 border-2 border-gray-300 bg-white text-gray-900 rounded-xl font-semibold hover:bg-gray-50 flex items-center space-x-2 transition-all"
+            >
+              <span>View Documentation</span>
+            </Link>
+          </div>
+
+          <div className="flex justify-center space-x-4 flex-wrap gap-4 mb-20">
             <Link
               href="https://github.com/leandre000/android-apk-blt"
               className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 flex items-center space-x-2 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-900/20 transition-all"
