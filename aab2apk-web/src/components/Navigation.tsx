@@ -18,9 +18,10 @@ export default function Navigation() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/converter', label: 'Features' },
-    { href: '/reviews', label: 'Pricing' },
-    { href: '/docs', label: 'About' },
+    { href: '/converter', label: 'Converter' },
+    { href: '/reviews', label: 'Reviews' },
+    { href: '/docs', label: 'Docs' },
+    { href: '/dashboard', label: 'Dashboard' },
   ]
 
   return (
@@ -31,7 +32,7 @@ export default function Navigation() {
             <div className="bg-gradient-to-br from-blue-600 to-indigo-600 p-2 rounded-lg">
               <Zap className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">Task.io</span>
+            <span className="text-xl font-bold text-gray-900">AAB2APK.io</span>
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
@@ -51,12 +52,12 @@ export default function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center space-x-3">
-            <button className="px-5 py-2.5 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+            <Link href="/dashboard" className="px-5 py-2.5 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
               Sign In
-            </button>
-            <button className="px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all">
-              Free Sign Up →
-            </button>
+            </Link>
+            <Link href="/converter" className="px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all">
+              Start Converting →
+            </Link>
           </div>
 
           <button
