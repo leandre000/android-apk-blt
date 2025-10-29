@@ -2,8 +2,9 @@
 
 import { useState, useCallback } from 'react'
 import { Upload, Download, Settings, Zap, CheckCircle, AlertCircle, Loader2, FileArchive, Shield } from 'lucide-react'
-import Link from 'next/link'
 import { useDropzone } from 'react-dropzone'
+import Navigation from '@/components/Navigation'
+import Footer from '@/components/Footer'
 
 interface ConversionOptions {
   universal: boolean
@@ -101,31 +102,19 @@ export default function ConverterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <nav className="border-b bg-white/50 backdrop-blur-sm dark:bg-gray-900/50 dark:border-gray-800">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center space-x-2">
-            <Zap className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-            <span className="text-2xl font-bold dark:text-white">AAB2APK Pro</span>
-          </Link>
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="px-4 py-2 text-sm font-medium hover:text-blue-600 dark:text-gray-300">
-              Home
-            </Link>
-            <Link href="/docs" className="px-4 py-2 text-sm font-medium hover:text-blue-600 dark:text-gray-300">
-              Docs
-            </Link>
-            <Link href="/dashboard" className="px-4 py-2 text-sm font-medium hover:text-blue-600 dark:text-gray-300">
-              Dashboard
-            </Link>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-violet-100 via-purple-50 to-indigo-100 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-violet-300/30 dark:bg-violet-600/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-300/30 dark:bg-indigo-600/20 rounded-full blur-3xl"></div>
+      </div>
 
-      <main className="container mx-auto px-4 py-12">
+      <Navigation />
+
+      <main className="flex-1 container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
               Convert AAB to APK
             </h1>
             <p className="text-gray-600 dark:text-gray-300">
@@ -133,22 +122,22 @@ export default function ConverterPage() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 mb-8">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-3xl shadow-2xl p-8 mb-8 border border-violet-200/50 dark:border-violet-700/50">
             {!result ? (
               <>
                 <div
                   {...getRootProps()}
                   className={`border-2 border-dashed rounded-xl p-12 text-center transition-all cursor-pointer ${
                     isDragActive
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                      : 'border-gray-300 dark:border-gray-600 hover:border-blue-400'
+                      ? 'border-violet-500 bg-violet-50 dark:bg-violet-900/20'
+                      : 'border-gray-300 dark:border-gray-600 hover:border-violet-400'
                   }`}
                 >
                   <input {...getInputProps()} />
                   <div className="flex flex-col items-center">
                     {file ? (
                       <>
-                        <FileArchive className="h-16 w-16 text-blue-600 dark:text-blue-400 mb-4" />
+                        <FileArchive className="h-16 w-16 text-violet-600 dark:text-violet-400 mb-4" />
                         <p className="text-lg font-medium text-gray-900 dark:text-white mb-2">
                           {file.name}
                         </p>
@@ -160,7 +149,7 @@ export default function ConverterPage() {
                             e.stopPropagation()
                             resetConverter()
                           }}
-                          className="mt-4 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400"
+                          className="mt-4 text-sm text-violet-600 hover:text-violet-700 dark:text-violet-400"
                         >
                           Choose different file
                         </button>
@@ -204,7 +193,7 @@ export default function ConverterPage() {
                           type="checkbox"
                           checked={options.universal}
                           onChange={(e) => setOptions({ ...options, universal: e.target.checked })}
-                          className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                          className="w-5 h-5 text-violet-600 rounded focus:ring-2 focus:ring-violet-500"
                         />
                         <div>
                           <p className="font-medium dark:text-white">Universal APK</p>
@@ -219,7 +208,7 @@ export default function ConverterPage() {
                           type="checkbox"
                           checked={options.optimize}
                           onChange={(e) => setOptions({ ...options, optimize: e.target.checked })}
-                          className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                          className="w-5 h-5 text-violet-600 rounded focus:ring-2 focus:ring-violet-500"
                         />
                         <div>
                           <p className="font-medium dark:text-white">Optimize APK</p>
@@ -234,7 +223,7 @@ export default function ConverterPage() {
                           type="checkbox"
                           checked={options.sign}
                           onChange={(e) => setOptions({ ...options, sign: e.target.checked })}
-                          className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                          className="w-5 h-5 text-violet-600 rounded focus:ring-2 focus:ring-violet-500"
                         />
                         <div>
                           <p className="font-medium dark:text-white">Sign APK</p>
@@ -252,7 +241,7 @@ export default function ConverterPage() {
                     <button
                       onClick={handleConvert}
                       disabled={converting}
-                      className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 transition-all"
+                      className="w-full py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-violet-500/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 transition-all"
                     >
                       {converting ? (
                         <>
@@ -271,7 +260,7 @@ export default function ConverterPage() {
                       <div className="mt-4">
                         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                           <div
-                            className="bg-gradient-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all duration-300"
+                            className="bg-gradient-to-r from-violet-600 to-indigo-600 h-2 rounded-full transition-all duration-300"
                             style={{ width: `${progress}%` }}
                           />
                         </div>
@@ -313,7 +302,7 @@ export default function ConverterPage() {
                 <div className="space-y-3">
                   <button
                     onClick={() => alert('Download functionality will be implemented with backend')}
-                    className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 flex items-center justify-center space-x-2"
+                    className="w-full py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-violet-500/50 flex items-center justify-center space-x-2 transition-all"
                   >
                     <Download className="h-5 w-5" />
                     <span>Download APK</span>
@@ -321,7 +310,7 @@ export default function ConverterPage() {
 
                   <button
                     onClick={resetConverter}
-                    className="w-full py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-700"
+                    className="w-full py-4 border-2 border-violet-300 dark:border-violet-600 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-violet-50 dark:hover:bg-violet-900/20 transition-all"
                   >
                     Convert Another File
                   </button>
@@ -331,24 +320,30 @@ export default function ConverterPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center">
-              <Zap className="h-10 w-10 text-blue-600 dark:text-blue-400 mx-auto mb-3" />
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl border border-violet-200/50 dark:border-violet-700/50">
+              <div className="w-12 h-12 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <Zap className="h-6 w-6 text-white" />
+              </div>
               <h3 className="font-semibold dark:text-white mb-2">Fast Conversion</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Convert your files in seconds
               </p>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center">
-              <Shield className="h-10 w-10 text-green-600 dark:text-green-400 mx-auto mb-3" />
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl border border-violet-200/50 dark:border-violet-700/50">
+              <div className="w-12 h-12 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <Shield className="h-6 w-6 text-white" />
+              </div>
               <h3 className="font-semibold dark:text-white mb-2">100% Secure</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Files are encrypted and auto-deleted
               </p>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center">
-              <Download className="h-10 w-10 text-purple-600 dark:text-purple-400 mx-auto mb-3" />
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl border border-violet-200/50 dark:border-violet-700/50">
+              <div className="w-12 h-12 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <Download className="h-6 w-6 text-white" />
+              </div>
               <h3 className="font-semibold dark:text-white mb-2">Easy Download</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 One-click download of your APK
@@ -357,6 +352,8 @@ export default function ConverterPage() {
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   )
 }
