@@ -5,28 +5,33 @@ import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 via-white to-white relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-purple-100/40 to-transparent"></div>
+      </div>
+
       <Navigation />
 
-      <main className="flex-1 container mx-auto px-4 py-12 sm:py-20">
+      <main className="flex-1 container mx-auto px-6 py-16 sm:py-24 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center space-x-2 bg-blue-100 dark:bg-blue-900/30 px-4 py-2 rounded-full mb-6">
-            <Star className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-            <span className="text-sm font-medium text-blue-600 dark:text-blue-400">Open Source & Free Forever</span>
+          <div className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full mb-8 shadow-sm border border-purple-200">
+            <Shield className="h-4 w-4 text-blue-600" />
+            <span className="text-sm font-medium text-gray-700">Open Source & Free Forever</span>
           </div>
           
-          <h1 className="text-4xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 leading-tight tracking-tight">
             Convert AAB to APK
             <br />
             Like a Pro
           </h1>
           
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8">
+          <p className="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
             Professional Android App Bundle converter with signing, optimization, and more.
             Fast, secure, and easy to use. No registration required.
           </p>
           
-          <div className="flex justify-center space-x-4 flex-wrap gap-4">
+          <div className="flex justify-center space-x-4 flex-wrap gap-4 mb-20">
             <Link
               href="/converter"
               className="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 flex items-center space-x-2 dark:bg-blue-500 dark:hover:bg-blue-600 shadow-lg shadow-blue-500/50 transition-all"
