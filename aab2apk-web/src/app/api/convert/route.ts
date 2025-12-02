@@ -4,12 +4,13 @@ import { join } from 'path'
 import { exec } from 'child_process'
 import { promisify } from 'util'
 import { existsSync } from 'fs'
+import { env, getJavaPath } from '@/lib/env'
 
 const execAsync = promisify(exec)
 
-const MAX_FILE_SIZE = 100 * 1024 * 1024 // 100MB
-const UPLOAD_DIR = join(process.cwd(), 'uploads')
-const OUTPUT_DIR = join(process.cwd(), 'output')
+const MAX_FILE_SIZE = env.maxFileSize
+const UPLOAD_DIR = join(process.cwd(), env.uploadDir)
+const OUTPUT_DIR = join(process.cwd(), env.outputDir)
 
 interface ConvertRequest {
   file: string // base64 encoded file
@@ -69,14 +70,21 @@ export async function POST(request: NextRequest) {
     // Build conversion command
     const options = body.options || {}
     const mode = options.universal ? 'universal' : 'default'
+    const javaPath = getJavaPath()
     
-    let command = `java -jar "${bundletoolPath}" build-apks --bundle="${inputPath}" --output="${outputPath}" --mode=${mode}`
+    let command = `"${javaPath}" -jar "${bundletoolPath}" build-apks --bundle="${inputPath}" --output="${outputPath}" --mode=${mode}`
 
-    // Add signing if provided
-    if (options.sign && options.keystore) {
-      const keystore = options.keystore
+    // Add signing if provided or if enabled in env
+    if (options.sign || env.enableSigning) {
+      const keystore = options.keystore || {
+        path: env.keystorePath,
+        alias: env.keystoreAlias,
+        password: env.keystorePassword || env.keyPassword
+      }
+      
       if (keystore.path && keystore.alias && keystore.password) {
-        command += ` --ks="${keystore.path}" --ks-key-alias="${keystore.alias}" --ks-pass=pass:${keystore.password} --key-pass=pass:${keystore.password}`
+        const keyPass = options.keystore?.password || env.keyPassword || keystore.password
+        command += ` --ks="${keystore.path}" --ks-key-alias="${keystore.alias}" --ks-pass=pass:${keystore.password} --key-pass=pass:${keyPass}`
       }
     }
 
@@ -133,6 +141,11 @@ export async function POST(request: NextRequest) {
 }
 
 async function getBundletoolPath(): Promise<string> {
+  // Use configured path if available
+  if (env.bundletoolPath && existsSync(env.bundletoolPath)) {
+    return env.bundletoolPath
+  }
+
   // Check common locations
   const possiblePaths = [
     join(process.cwd(), 'bundletool-all.jar'),
@@ -146,20 +159,26 @@ async function getBundletoolPath(): Promise<string> {
     }
   }
 
-  // Download bundletool if not found
-  const bundletoolPath = join(process.cwd(), 'bundletool-all.jar')
-  const bundletoolUrl = 'https://github.com/google/bundletool/releases/latest/download/bundletool-all.jar'
-  
-  try {
-    const response = await fetch(bundletoolUrl)
-    if (!response.ok) throw new Error('Failed to download bundletool')
+  // Download bundletool if auto-download is enabled
+  if (env.bundletoolAutoDownload) {
+    const bundletoolPath = join(process.cwd(), 'bundletool-all.jar')
+    const bundletoolUrl = env.bundletoolVersion === 'latest'
+      ? 'https://github.com/google/bundletool/releases/latest/download/bundletool-all.jar'
+      : `https://github.com/google/bundletool/releases/download/${env.bundletoolVersion}/bundletool-all-${env.bundletoolVersion}.jar`
     
-    const buffer = Buffer.from(await response.arrayBuffer())
-    await writeFile(bundletoolPath, buffer)
-    
-    return bundletoolPath
-  } catch (error) {
-    throw new Error('Bundletool not found and download failed. Please ensure bundletool is available.')
+    try {
+      const response = await fetch(bundletoolUrl)
+      if (!response.ok) throw new Error('Failed to download bundletool')
+      
+      const buffer = Buffer.from(await response.arrayBuffer())
+      await writeFile(bundletoolPath, buffer)
+      
+      return bundletoolPath
+    } catch (error) {
+      throw new Error('Bundletool not found and download failed. Please ensure bundletool is available.')
+    }
   }
+
+  throw new Error('Bundletool not found. Set BUNDLETOOL_PATH or enable BUNDLETOOL_AUTO_DOWNLOAD.')
 }
 

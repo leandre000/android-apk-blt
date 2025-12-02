@@ -4,11 +4,12 @@ import { join } from 'path'
 import { exec } from 'child_process'
 import { promisify } from 'util'
 import { existsSync } from 'fs'
+import { env, getJavaPath } from '@/lib/env'
 
 const execAsync = promisify(exec)
 
-const MAX_FILE_SIZE = 100 * 1024 * 1024 // 100MB
-const UPLOAD_DIR = join(process.cwd(), 'uploads')
+const MAX_FILE_SIZE = env.maxFileSize
+const UPLOAD_DIR = join(process.cwd(), env.uploadDir)
 
 interface InfoRequest {
   file: string // base64 encoded file
@@ -48,9 +49,10 @@ export async function POST(request: NextRequest) {
 
     // Get bundletool path
     const bundletoolPath = await getBundletoolPath()
+    const javaPath = getJavaPath()
 
     // Get AAB info
-    const command = `java -jar "${bundletoolPath}" dump manifest --bundle="${inputPath}"`
+    const command = `"${javaPath}" -jar "${bundletoolPath}" dump manifest --bundle="${inputPath}"`
 
     try {
       const { stdout, stderr } = await execAsync(command, {
