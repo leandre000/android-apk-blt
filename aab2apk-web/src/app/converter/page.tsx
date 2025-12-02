@@ -5,6 +5,7 @@ import { Upload, Download, Settings, Zap, CheckCircle, AlertCircle, Loader2, Fil
 import { useDropzone } from 'react-dropzone'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import { convertAABToAPK, downloadFile, type ConversionOptions as ServiceConversionOptions } from '@/lib/conversion-service'
 
 interface ConversionOptions {
   universal: boolean
@@ -16,7 +17,8 @@ interface ConversionResult {
   success: boolean
   fileName: string
   fileSize: number
-  downloadUrl: string
+  file?: string // base64 encoded file
+  downloadUrl?: string
 }
 
 export default function ConverterPage() {
@@ -58,29 +60,41 @@ export default function ConverterPage() {
     setError(null)
 
     try {
-      const steps = [
-        { progress: 20, message: 'Uploading file...' },
-        { progress: 40, message: 'Extracting AAB...' },
-        { progress: 60, message: 'Converting to APK...' },
-        { progress: 80, message: options.optimize ? 'Optimizing APK...' : 'Finalizing...' },
-        { progress: 100, message: 'Complete!' }
-      ]
+      // Update progress
+      setProgress(10)
 
-      for (const step of steps) {
-        await new Promise(resolve => setTimeout(resolve, 800))
-        setProgress(step.progress)
+      // Prepare conversion options
+      const conversionOptions: ServiceConversionOptions = {
+        universal: options.universal,
+        optimize: options.optimize,
+        sign: options.sign,
       }
 
-      const mockResult: ConversionResult = {
-        success: true,
-        fileName: file.name.replace('.aab', '.apk'),
-        fileSize: file.size * 0.8,
-        downloadUrl: '#'
-      }
+      setProgress(30)
 
-      setResult(mockResult)
-    } catch (err) {
-      setError('Conversion failed. Please try again.')
+      // Call conversion API
+      const result = await convertAABToAPK(file, conversionOptions)
+
+      setProgress(80)
+
+      if (result.success && result.fileName && result.fileSize) {
+        const conversionResult: ConversionResult = {
+          success: true,
+          fileName: result.fileName,
+          fileSize: result.fileSize,
+          file: result.file,
+        }
+        setResult(conversionResult)
+        setProgress(100)
+      } else {
+        setError(result.error || 'Conversion failed. Please try again.')
+        if (result.details) {
+          console.error('Conversion error details:', result.details)
+        }
+      }
+    } catch (err: any) {
+      setError(err.message || 'Conversion failed. Please try again.')
+      console.error('Conversion error:', err)
     } finally {
       setConverting(false)
     }
@@ -301,7 +315,13 @@ export default function ConverterPage() {
 
                 <div className="space-y-3">
                   <button
-                    onClick={() => alert('Download functionality will be implemented with backend')}
+                    onClick={() => {
+                      if (result.file && result.fileName) {
+                        downloadFile(result.file, result.fileName)
+                      } else {
+                        setError('File not available for download')
+                      }
+                    }}
                     className="w-full py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-violet-500/50 flex items-center justify-center space-x-2 transition-all"
                   >
                     <Download className="h-5 w-5" />
